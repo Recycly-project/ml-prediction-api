@@ -8,7 +8,7 @@ import os
 app = Flask(__name__)
 
 # Muat model
-modelpath = os.path.join(os.path.dirname(__file__), 'recycly_model.h5')
+model_path = os.path.join(os.path.dirname(__file__), 'recycly_model.h5')
 model = load_model(model_path)
 class_names = ['Botol Diterima', 'Botol Rusak', 'Bukan Botol']  # Sesuaikan dengan training
 
