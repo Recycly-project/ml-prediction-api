@@ -1,12 +1,15 @@
 from flask import Flask, request, jsonify
 import tensorflow as tf
+from tensorflow.keras.models import load_model
 import numpy as np
 from PIL import Image
+import os
 
 app = Flask(__name__)
 
 # Muat model
-model = tf.keras.models.load_model('recycly_model.h5')
+modelpath = os.path.join(os.path.dirname(_file), 'recycly_model.h5')
+model = load_model(model_path)
 class_names = ['Botol Diterima', 'Botol Rusak', 'Bukan Botol']  # Sesuaikan dengan training
 
 # Fungsi preprocess
