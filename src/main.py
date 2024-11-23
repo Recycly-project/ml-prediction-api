@@ -8,7 +8,7 @@ import os
 app = Flask(__name__)
 
 # Muat model
-model_path = os.path.join(os.path.dirname(__file__), 'recycly_model.h5')
+model_path = os.path.join(os.path.dirname(__file__), '..', 'model', 'recycly_model.h5')
 model = load_model(model_path)
 class_names = ['Botol Diterima', 'Botol Rusak', 'Bukan Botol']  # Sesuaikan dengan training
 
@@ -41,4 +41,4 @@ def verifyWasteCollection():
     })
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
