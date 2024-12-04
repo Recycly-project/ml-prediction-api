@@ -44,14 +44,14 @@ def verifyWasteCollection():
         
         prediction = model.predict(processed_image)
         predicted_class = np.argmax(prediction, axis=1)[0]
-        # confidence = float(np.max(prediction))
+        confidence = float(np.max(prediction))
 
         # Logika pemberian poin
         points = 10 if predicted_class == 0 else 0
 
         return jsonify({
             'label': class_names[predicted_class],
-            # 'confidence': confidence,
+            'confidence': confidence,
             'points': points
         })
     except ValueError as e:
