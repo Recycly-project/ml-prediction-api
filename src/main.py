@@ -20,9 +20,9 @@ except Exception as e:
 # Fungsi preprocess dengan error handling
 def preprocess_image(image):
     try:
-        image = image.resize((128, 128))  # Sesuaikan ukuran input model
+        image = image.resize((244, 244))  # Sesuaikan ukuran input model
         image = np.array(image) / 255.0  # Normalisasi
-        return image.reshape(1, 128, 128, 3)
+        return image.reshape(1, 244, 244, 3)
     except Exception as e:
         print(f"Error preprocessing image: {e}")
         raise ValueError("Error preprocessing the image") from e
