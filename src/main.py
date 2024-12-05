@@ -11,7 +11,7 @@ app = Flask(__name__)
 try:
     model_path = os.path.join(os.path.dirname(__file__), '..', 'model', 'recycly_model.h5')
     model = load_model(model_path)
-    class_names = ['Botol Diterima', 'Botol Rusak', 'Bukan Botol']  # Sesuaikan dengan training
+    class_names = ['Botol Utuh 1', 'Botol Rusak', 'Botol Utuh 2', 'Bukan Botol']  # Update untuk 4 kelas
 except Exception as e:
     model = None
     class_names = []
@@ -46,12 +46,30 @@ def verifyWasteCollection():
         predicted_class = np.argmax(prediction, axis=1)[0]
         confidence = float(np.max(prediction))
 
-        # Logika pemberian poin
-        points = 10 if predicted_class == 0 else 0
+        if class_names[predicted_class] == 'Botol Utuh 1':
+            points = 2 if confidence >= 0.65 else 0
+        elif class_names[predicted_class] == 'Botol Rusak':
+            points = 0
+        elif class_names[predicted_class] == 'Botol Utuh 2':
+            points = 1
+        else:
+            points = 0
+
+        if class_names[predicted_class] == 'Botol Utuh 1' and confidence < 0.65:
+            other_class_idx = np.argmax(np.delete(prediction, 0))
+            predicted_class = other_class_idx + 1
+            confidence = float(np.max(prediction))
+
+            if class_names[predicted_class] == 'Botol Rusak':
+                points = 0
+            elif class_names[predicted_class] == 'Botol Utuh 2':
+                points = 1
+            else:
+                points = 0
 
         return jsonify({
             'label': class_names[predicted_class],
-            'confidence': confidence,
+            # 'confidence': confidence,
             'points': points
         })
     except ValueError as e:
