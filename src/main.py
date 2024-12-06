@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 # Muat model dengan error handling
 try:
-    model_path = os.path.join(os.path.dirname(__file__), '..', 'model', 'recycly-model-2.h5')
+    model_path = os.path.join(os.path.dirname(__file__), '..' ,'model' ,'recycly-model-2.h5')
     model = load_model(model_path)
     class_names = ['Botol Utuh 1', 'Botol Rusak', 'Botol Utuh 2', 'Bukan Botol']  # Update untuk 4 kelas
 except Exception as e:
