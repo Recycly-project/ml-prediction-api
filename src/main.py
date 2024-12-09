@@ -142,6 +142,12 @@ def verify_waste_collection():
         return jsonify({'error': 'Internal server error'}), 500
 
 
+@app.route('/healthz', methods=['GET'])
+def health_check():
+    return jsonify({'status': 'OK', 'message': 'Service is running'}), 200
+
+
+
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8080))
     app.run(debug=False, host="0.0.0.0", port=port)
