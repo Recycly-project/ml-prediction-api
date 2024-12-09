@@ -52,10 +52,37 @@ The server responds with a JSON object containing the predicted class, confidenc
 
 ```json
 {
-  "label": "Botol Utuh 1",
-  "confidence": 0.85,
-  "points": 2,
-  "status": "botol diterima"
+    "confidence": 0.9999983310699463,
+    "label": "Botol Utuh 1",
+    "points": 2,
+    "status": "botol diterima"
+}
+```
+
+```json
+{
+    "confidence": 0.9979183077812195,
+    "label": "Botol Utuh 2",
+    "points": 1,
+    "status": "botol diterima"
+}
+```
+
+```json
+{
+    "confidence": 0.9733534455299377,
+    "label": "Bukan Botol",
+    "points": 0,
+    "status": "botol ditolak"
+}
+```
+
+```json
+{
+    "confidence": 0.9999915361404419,
+    "label": "Botol Rusak",
+    "points": 0,
+    "status": "botol ditolak"
 }
 ```
 
