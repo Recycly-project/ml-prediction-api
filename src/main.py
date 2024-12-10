@@ -22,7 +22,7 @@ MODEL_PATH = os.getenv('MODEL_PATH', 'model-prod/recycly-model-2.h5')
 CONFIDENCE_THRESHOLD = float(os.getenv('CONFIDENCE_THRESHOLD', 0.65))
 
 # Nama kelas yang digunakan dalam prediksi
-CLASS_NAMES = ['Botol Utuh 1', 'Botol Rusak', 'Botol Utuh 2', 'Bukan Botol']
+CLASS_NAMES = ['Bottle without bottle cap and label', 'Bottle Damage', 'Full Bottle', 'Not Bottle']
 
 
 def model_exists_in_gcs(bucket_name, model_path):
@@ -117,15 +117,15 @@ def verify_waste_collection():
         confidence = float(np.max(prediction))
 
         # Calculate points and status based on prediction
-        if CLASS_NAMES[predicted_class_idx] == 'Botol Utuh 1':
+        if CLASS_NAMES[predicted_class_idx] == 'Bottle without bottle cap and label':
             points = 2 if confidence >= CONFIDENCE_THRESHOLD else 0
-            status = "botol diterima" if points > 0 else "botol ditolak"
-        elif CLASS_NAMES[predicted_class_idx] == 'Botol Utuh 2':
+            status = "Bottle Accepted" if points > 0 else "Bottle Decline"
+        elif CLASS_NAMES[predicted_class_idx] == 'Full Bottle':
             points = 1
-            status = "botol diterima"
+            status = "Bottle Accepted"
         else:
             points = 0
-            status = "botol ditolak"
+            status = "Bottle Decline"
 
         return jsonify({
             'label': CLASS_NAMES[predicted_class_idx],
