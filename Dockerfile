@@ -1,12 +1,12 @@
-FROM python:3.9-slim
+# FROM python:3.9-slim
 
-WORKDIR /src/app
+# WORKDIR /src/app
 
-COPY . .
+# COPY . .
 
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
+# RUN pip install --upgrade pip && \
+#     pip install -r requirements.txt
 
-EXPOSE 8080
+# EXPOSE 8080
 
-CMD ["gunicorn", "-b", "0.0.0.0:8080", "src.main:app"]
+# CMD ["gunicorn", "-b", "0.0.0.0:8080", "src.main:app"]
